@@ -243,9 +243,7 @@ export class Application extends Model<Application> {
 
   static async getAverageLoanAmount(): Promise<number> {
     const result = await Application.findOne({
-      attributes: [
-        [this.sequelize.fn('AVG', this.sequelize.col('loan_amount')), 'averageLoanAmount']
-      ],
+      attributes: [[this.sequelize.fn('AVG', this.sequelize.col('loan_amount')), 'averageLoanAmount']],
     });
 
     const res = result?.get('averageLoanAmount') || 0;

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { api } from '@/api';
+import { ref } from 'vue';
 import { useModal } from '@/composables/useModal';
 import { useToast } from '@/composables/useToast';
-import { ref } from 'vue';
-const modal = useModal<boolean>()
-const toast = useToast()
+const modal = useModal<boolean>();
+const toast = useToast();
 
 const formData = ref({
   applicantName: '',
@@ -26,10 +26,10 @@ const formData = ref({
 });
 
 const submitApplication = async () => {
-  const response = await api.applications.post(formData.value)
-  if (response.success) toast.success('Application Saved Successfully.')
+  const response = await api.applications.post(formData.value);
+  if (response.success) toast.success('Application Saved Successfully.');
   else {
-    toast.error('Error occurred while saving application')
+    toast.error('Error occurred while saving application');
     formData.value.applicantName = '';
     formData.value.applicantEmail = '';
     formData.value.applicantMobilePhoneNumber = '';
@@ -47,8 +47,8 @@ const submitApplication = async () => {
     formData.value.outgoingValuation = 0;
     formData.value.savingsContribution = 0;
   }
-  modal.confirm(false)
-}
+  modal.confirm(false);
+};
 </script>
 
 <template>
@@ -68,46 +68,46 @@ const submitApplication = async () => {
       <form @submit.prevent="submitApplication()">
         <!-- Need to change with v-for after change state with object -->
         <label for="applicant_name">Name</label>
-        <BTextInput v-model="formData.applicantName" id="applicant_name" type="text" required />
+        <BTextInput id="applicant_name" v-model="formData.applicantName" type="text" required />
 
         <label for="applicant_email">Email</label>
-        <BTextInput v-model="formData.applicantEmail" id="applicant_email" type="email" required />
+        <BTextInput id="applicant_email" v-model="formData.applicantEmail" type="email" required />
 
         <label for="applicant_mobile_phone_number">Mobile Phone Number</label>
-        <BTextInput v-model="formData.applicantMobilePhoneNumber" id="applicant_mobile_phone_number" type="tel"
+        <BTextInput id="applicant_mobile_phone_number" v-model="formData.applicantMobilePhoneNumber" type="tel"
           required />
 
         <label for="applicant_address">Applicant Address</label>
-        <BTextInput v-model="formData.applicantAddress" id="applicant_address" required />
+        <BTextInput id="applicant_address" v-model="formData.applicantAddress" required />
         <label for="annual_income_before_tax">Annual Income Before Tax</label>
-        <BNumberInput v-model="formData.annualIncomeBeforeTax" id="annual_income_before_tax" required />
+        <BNumberInput id="annual_income_before_tax" v-model="formData.annualIncomeBeforeTax" required />
         <label for="incoming_address">Incoming Address</label>
-        <BTextInput v-model="formData.incomingAddress" id="incoming_address" required />
+        <BTextInput id="incoming_address" v-model="formData.incomingAddress" required />
         <label for="incoming_deposit">Incoming deposit</label>
-        <BNumberInput v-model="formData.incomingDeposit" id="incoming_deposit" required />
+        <BNumberInput id="incoming_deposit" v-model="formData.incomingDeposit" required />
 
         <label for="incoming_price">Incoming Price</label>
-        <BNumberInput v-model="formData.incomingPrice" id="incoming_price" required />
+        <BNumberInput id="incoming_price" v-model="formData.incomingPrice" required />
         <label for="incoming_stamp_duty">Incoming Stamp Duty</label>
-        <BNumberInput v-model="formData.incomingStampDuty" id="incoming_stamp_duty" required />
+        <BNumberInput id="incoming_stamp_duty" v-model="formData.incomingStampDuty" required />
         <label for="loan_amount">Loan Amount</label>
-        <BNumberInput v-model="formData.loanAmount" id="loan_amount" required />
+        <BNumberInput id="loan_amount" v-model="formData.loanAmount" required />
         <label for="loan_duration">Loan Duration</label>
-        <BNumberInput v-model="formData.loanDuration" id="loan_duration" required />
+        <BNumberInput id="loan_duration" v-model="formData.loanDuration" required />
         <label for="monthly_expenses">Monthly Expenses</label>
-        <BNumberInput v-model="formData.monthlyExpenses" id="monthly_expenses" required />
+        <BNumberInput id="monthly_expenses" v-model="formData.monthlyExpenses" required />
         <label for="outgoing_address">Outgoing Address</label>
-        <BTextInput v-model="formData.outgoingAddress" id="outgoing_address" required />
+        <BTextInput id="outgoing_address" v-model="formData.outgoingAddress" required />
         <label for="outgoing_mortgage">Outgoing Mortgage</label>
-        <BNumberInput v-model="formData.outgoingMortgage" id="outgoing_mortgage" required />
+        <BNumberInput id="outgoing_mortgage" v-model="formData.outgoingMortgage" required />
         <label for="outgoing_valuation">Outgoing Valuation</label>
-        <BNumberInput v-model="formData.outgoingValuation" id="outgoing_valuation" required />
+        <BNumberInput id="outgoing_valuation" v-model="formData.outgoingValuation" required />
         <label for="savings_contribution">Savings Contribution</label>
-        <BNumberInput v-model="formData.savingsContribution" id="savings_contribution" required />
+        <BNumberInput id="savings_contribution" v-model="formData.savingsContribution" required />
       </form>
 
       <template #footer>
-        <BButton type="submit" variant="primary" label="Submit"></BButton>
+        <BButton type="submit" variant="primary" label="Submit" @click="submitApplication"></BButton>
         <BButton label="Cancel" @click="modal.confirm(false)"></BButton>
       </template>
     </BModal>

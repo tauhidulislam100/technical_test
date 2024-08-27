@@ -13,7 +13,7 @@ const applications = ref<ApiSchema['BrokerApplicationDto'][]>([]);
 const tasks = ref<ApiSchema['BrokerTask'][]>([]);
 
 const loadApplications = async () => {
-  const activeStatus: components["schemas"]["ApplicationActiveStatus"] = ['submitted', 'under_review', 'funded'];
+  const activeStatus: components['schemas']['ApplicationActiveStatus'] = ['submitted', 'under_review', 'funded'];
 
   const result = await api.applications.list({ status: activeStatus });
 
